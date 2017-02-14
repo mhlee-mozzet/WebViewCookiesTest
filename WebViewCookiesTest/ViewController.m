@@ -60,6 +60,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    NSLog(@"cookies before load: %@", cookies);
+    
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://developer.apple.com"]]];
 }
 
@@ -82,7 +86,7 @@
     NSLog(@"%s", __FUNCTION__);
     
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
-    NSLog(@"cookies: %@", cookies);
+    NSLog(@"cookies after load: %@", cookies);
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
