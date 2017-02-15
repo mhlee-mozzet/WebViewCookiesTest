@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#define TargetURL   [NSURL URLWithString:@"https://www.facebook.com"]
+
 @interface ViewController () < UIWebViewDelegate >
 
 @property UIWebView *webView;
@@ -61,10 +63,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:TargetURL];
     NSLog(@"cookies before load: %@", cookies);
     
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://developer.apple.com"]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:TargetURL]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,7 +87,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"%s", __FUNCTION__);
     
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:TargetURL];
     NSLog(@"cookies after load: %@", cookies);
 }
 
